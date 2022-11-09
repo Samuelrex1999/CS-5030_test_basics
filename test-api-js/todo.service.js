@@ -14,6 +14,7 @@ class todoservice{
             "done": false
         }]
     }
+
     constructor(){
         this.todos=this.todo_data;
     }
@@ -23,17 +24,21 @@ class todoservice{
     }
 
     add_todo(todo){
-        // Your code here
+        this.todo_data.todo.push(todo);
+        console.log(this.todo_data.todo)
     }
 
     delete_todo(id){
-        // Your code here
+        this.todo_data.todo = this.todo_data.todo.filter(function(todo,index){
+            return index!=id;
+        })  
+        console.log(this.todo_data.todo)      
     }
 
     update_todo(id, todo){
-        // Your code here
+        this.todo_data.todo[id]= todo;    
+        console.log(this.todo_data.todo)    
     }
 }
 
-
-module.exports= todoservice;
+module.exports = todoservice;

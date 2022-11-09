@@ -1,27 +1,25 @@
-
-
-var todoservice = require('./todo.service.js');
-describe('todo test suite', () => {
-
-    test("truth_value", () => {
-        expect(true).toBe(true);
-    });
-    
-    let todo_service = new todoservice();
-
-    test("if service instance is created", () => {
-        expect(todo_service instanceof todoservice).toBe(true);
+var todoservice = require("./todo.service.js")
+describe('todo testing', () => {
+    let ts = new todoservice();
+    test("add_todo method testing", () => {
+        ts.add_todo({"title": "T1",
+        "description": "D1",
+        "done": false});
+        expect(ts.todo_data.todo.length).toEqual(4);
     });
 
-    
-    // Initial length of the todo list is 3 // 3 default tasks
-    test("get_todos", () => {
-        expect(todo_service.get_todos().todo.length).toEqual(3);
+   test("update_todo method testing", () => {
+        ts.update_todo(0, {"title": "Test title",
+        "description": "Test description",
+        "done": false});
+        expect(ts.get_todos(0) == {"title": "Test title",
+        "description": "Test description",
+        "done": false});
     });
 
-    
-
-    // Write all your test cases here that corresponds to software requirements
-
-
+    test("delete_todo method testing", () => {
+        var length=ts.todo_data.todo.length
+        ts.delete_todo(0);
+        expect(ts.todo_data.todo.length).toEqual(length-1);
+    });
 });
